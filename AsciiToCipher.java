@@ -1,15 +1,14 @@
 import java.util.*;
 import java.io.*;
-class messageDecoder
+class AsciiToCipher
 {
 	public static void main(String args[])
 	{
 		Scanner sc=new Scanner (System.in);
-		System.out.println("INCODED TEXT");
+		System.out.println("INCODED (ASCII VALUE)");
 		String str=sc.nextLine();
 		String lw="";
 		StringBuffer sb=new StringBuffer(str);
-		sb.reverse();
 		outer:while(sb.length()!=0)
 		{
 			if(sb.length()==1)
@@ -39,5 +38,27 @@ class messageDecoder
 		}
 		System.out.println("DECODED TEXT");
 		System.out.println(lw);
+		String nw="";
+		for(int i=0;i<lw.length();i++)
+		{
+			char ch=lw.charAt(i);
+			int a=(int)ch;
+			if((a>=65&&a<=77)||(a>=97&&a<=109))
+			{
+				a=a+13;
+				nw=nw+(char)a;
+			}
+			else if((a>=78&&a<=90)||(a>=110&&a<=127))
+			{
+				a=a+13;
+				nw=nw+(char)a;
+			}
+			else if(a==32)
+				nw=nw+" ";
+			else
+				nw=nw+ch;
+		}
+		System.out.println("CAESAR CIPHER(SHIFT 13)");
+		System.out.println(nw);
 	}
 }
